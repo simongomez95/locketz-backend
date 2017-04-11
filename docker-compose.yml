@@ -1,0 +1,11 @@
+web:
+  image: simongomez95/locketz
+  command: sails lift
+  ports:
+    - "80:1337"
+  links:
+    - db
+  volumes:
+    -  c:/users/yolas/workbench/locketz-backend/:/app
+db:
+  image: mongo
