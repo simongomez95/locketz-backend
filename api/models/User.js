@@ -22,6 +22,11 @@ module.exports = {
         encryptedPassword: {
             type: 'string'
         },
+
+        userType: {
+            type: 'boolean', // True if Content Creator, False if consumer
+            required: 'true'
+        },
         // We don't wan't to send back encrypted password either
         toJSON: function () {
             var obj = this.toObject();
