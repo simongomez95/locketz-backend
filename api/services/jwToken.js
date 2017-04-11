@@ -7,7 +7,7 @@
 
 var
     jwt = require('jsonwebtoken'),
-    tokenSecret = "secretokawaii";
+    tokenSecret = "secretokawaii1313";
 
 // Generates a token from supplied payload
 module.exports.issue = function(payload) {
