@@ -16,7 +16,7 @@ module.exports = {
         email: {
             type: 'email',
             required: 'true',
-            unique: true // Yes unique one
+            unique: true
         },
 
         encryptedPassword: {
@@ -26,6 +26,11 @@ module.exports = {
         userType: {
             type: 'boolean', // True if Content Creator, False if consumer
             required: 'true'
+        },
+
+        avatar: {
+            type: 'binary',
+            required: 'false'
         },
         // We don't wan't to send back encrypted password either
         toJSON: function () {
