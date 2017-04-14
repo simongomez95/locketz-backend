@@ -23,6 +23,7 @@ module.exports = {
         });
     },
 
+    // POST /user/uploadAvatar file: avatar, token
     uploadAvatar: function (req, res) {
         req.file('avatar').upload({
             maxBytes: 10000000
@@ -37,7 +38,7 @@ module.exports = {
             }
 
             // Save the "fd" and the url where the avatar for a user can be accessed
-            userId  = jwToken.decode(req);
+            userId  = jwToken.getId(req);
             User.update(userId, {
 
                 // Generate a unique URL where the avatar can be downloaded.
@@ -58,7 +59,7 @@ module.exports = {
 
     downloadAvatar: function (req, res){
 
-        userId  = jwToken.decode(req);
+        userId  = jwToken.getId(req);
 
         User.findOne(userId).exec(function (err, user){
             if (err) {
@@ -89,5 +90,9 @@ module.exports = {
                 })
                 .pipe(res);
         });
+    },
+
+    uploadPhoto: function (req, res) {
+
     }
 };
