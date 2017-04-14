@@ -7,5 +7,14 @@ web:
     - db
   volumes:
     -  c:/users/yolas/workbench/locketz-backend/:/app
+
 db:
-  image: mongo
+  image: postgres
+  volumes:
+    - postgres:/var/lib/postgresql/data
+  environment:
+    - POSTGRES_USER=simo
+    - POSTGRES_PASSWORD=contrasena
+
+#db:
+#  image: mongo

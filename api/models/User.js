@@ -29,8 +29,7 @@ module.exports = {
         },
 
         avatar: {
-            type: 'binary',
-            required: 'false'
+            type: 'binary'
         },
         // We don't wan't to send back encrypted password either
         toJSON: function () {
