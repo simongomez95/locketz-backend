@@ -28,8 +28,12 @@ module.exports = {
             required: 'true'
         },
 
-        avatar: {
-            type: 'binary'
+        avatarUrl: {
+            type: 'string'
+        },
+
+        avatarFd: {
+            type: 'string'
         },
         // We don't wan't to send back encrypted password either
         toJSON: function () {

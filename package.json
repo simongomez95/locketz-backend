@@ -26,6 +26,7 @@
     "sails-disk": "^0.10.10",
     "sails-mongo": "^0.12.2",
     "sails-postgresql": "^0.11.4",
+    "skipper-disk": "^0.5.9",
     "skipper-gridfs": "^0.5.3",
     "skipper-postgresql": "^0.13.2"
   },

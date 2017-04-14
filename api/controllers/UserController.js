@@ -25,12 +25,7 @@ module.exports = {
 
     uploadAvatar: function (req, res) {
         req.file('avatar').upload({
-            adapter: require('skipper-postgresql'),
-            connection: {
-                host: process.env.DB_PORT_5432_TCP_ADDR,
-                user: 'simo',
-                password: 'contrasena'
-            }
+            maxBytes: 10000000
         },function whenDone(err, uploadedFiles) {
             if (err) {
                 return res.negotiate(err);
@@ -44,12 +39,55 @@ module.exports = {
             // Save the "fd" and the url where the avatar for a user can be accessed
             userId  = jwToken.decode(req);
             User.update(userId, {
-                avatar: uploadedFiles[0]
+
+                // Generate a unique URL where the avatar can be downloaded.
+                // todo: Poner app URL en variable de entorno
+                // avatarUrl: require('util').format('%s/user/avatar/%s', sails.config.appUrl, userId),
+
+                avatarUrl: '/app/user/avatar/'+userId,
+
+                // Grab the first file and use it's `fd` (file descriptor)
+                avatarFd: uploadedFiles[0].fd
             })
                 .exec(function (err){
                     if (err) return res.negotiate(err);
                     return res.ok();
                 });
+        });
+    },
+
+    downloadAvatar: function (req, res){
+
+        userId  = jwToken.decode(req);
+
+        User.findOne(userId).exec(function (err, user){
+            if (err) {
+                return res.negotiate(err);
+            }
+            if (!user) {
+                console.log("no hay usuario lol");
+                return res.notFound();
+            }
+
+            // User has no avatar image uploaded.
+            // (should have never have hit this endpoint and used the default image)
+            if (!user.avatarFd) {
+                console.log("no hay fd");
+                return res.notFound();
+            }
+
+            var SkipperDisk = require('skipper-disk');
+            var fileAdapter = SkipperDisk(/* optional opts */);
+
+            // set the filename to the same file as the user uploaded
+            //res.set("Content-disposition", "attachment; filename='" + file.name + "'");
+
+            // Stream the file down
+            fileAdapter.read(user.avatarFd)
+                .on('error', function (err){
+                    return res.serverError(err);
+                })
+                .pipe(res);
         });
     }
 };

@@ -41,7 +41,8 @@ module.exports.decode = function(req) {
     } else {
         return res.json(401, {err: 'No Authorization header was found'});
     }
-    return jwt.decode(token).payload;
+    console.log(jwt.decode(token).id);
+    return jwt.decode(token).id;
 };
 
 // Verifies token on a request
