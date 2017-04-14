@@ -1,6 +1,6 @@
 web:
   image: simongomez95/locketz
-  command: sails lift
+  command: bash -c "npm install && sails lift"
   ports:
     - "80:1337"
   links:

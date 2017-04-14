@@ -1,5 +1,5 @@
 {
-  "name": "locketz-backend\\",
+  "name": "locketz-backend",
   "private": true,
   "version": "0.0.0",
   "description": "a Sails application",
@@ -37,7 +37,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anonymous node/sails user/locketz-backend\\.git"
+    "url": "git://github.com/anonymous node/sails user/locketz-backend.git"
   },
   "author": "anonymous node/sails user",
   "license": "",

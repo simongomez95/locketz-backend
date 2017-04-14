@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  ttl: '1d',
+
   attributes: {
 
     owner: {
