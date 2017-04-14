@@ -12,14 +12,7 @@ module.exports = {
   attributes: {
 
     owner: {
-      model: 'user',
-      unique: 'true'
-    },
-
-    url: {
-      type: 'string',
-      required: 'true',
-      unique: 'true'
+      model: 'user'
     },
 
     fd: {
