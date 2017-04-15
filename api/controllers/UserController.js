@@ -6,6 +6,9 @@
  */
 
 module.exports = {
+
+  // POST /user/create - email(email), username(string), password(string), confirmPassword(string),
+  // userType(bool: true for ContentCreator false for Consumer
   create: function (req, res) {
     if (req.body.password !== req.body.confirmPassword) {
       return res.json(401, {err: 'Password doesn\'t match, What a shame!'});
@@ -23,7 +26,7 @@ module.exports = {
     });
   },
 
-  // POST /user/uploadAvatar file: avatar, token
+  // POST /user/uploadAvatar - file: avatar, token
   uploadAvatar: function (req, res) {
     req.file('avatar').upload({
       maxBytes: 10000000
@@ -57,6 +60,7 @@ module.exports = {
     });
   },
 
+  // GET /user/downloadAvatar - token
   downloadAvatar: function (req, res){
 
     userId  = jwToken.getId(req);
@@ -92,7 +96,16 @@ module.exports = {
     });
   },
 
-  uploadPhoto: function (req, res) {
+  // POST /user/follow - followUser(string)
+  follow: function (req, res) {
 
+    userId  = jwToken.getId(req);
+    User.findOne(userId).exec(function(err, user) {
+      if(err) return res.negotiate(err);
+
+      user.follows.add(req.body.followUser);
+
+      user.save(function(err) {});
+    });
   }
 };

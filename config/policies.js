@@ -21,7 +21,8 @@ module.exports.policies = {
 
   '*': ['isAuthorized'], // Everything resctricted here
     'UserController': {
-        'create': true // We dont need authorization here, allowing public access
+        'create': true, // We dont need authorization here, allowing public access
+        'follow': 'isConsumer'
     },
 
     'AuthController': {

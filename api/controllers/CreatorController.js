@@ -12,6 +12,7 @@ module.exports = {
   /**
    * `CreatorController.uploadPhoto()`
    */
+  // POST /creator/uploadPhoto file: photo, token
   uploadPhoto: function (req, res) {
     req.file('photo').upload({
       maxBytes: 10000000

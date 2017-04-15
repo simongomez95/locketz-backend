@@ -19,6 +19,12 @@ module.exports = {
       unique: true
     },
 
+    username: {
+      type: 'string',
+      required: 'true',
+      unique: 'true'
+    },
+
     encryptedPassword: {
       type: 'string'
     },
@@ -39,6 +45,16 @@ module.exports = {
     photos: {
       collection: 'photo',
       via: 'owner'
+    },
+
+    follows: {
+      collection: 'user',
+      via: 'followers'
+    },
+
+    followers: {
+      collection: 'user',
+      via :'follows'
     },
 
     // We don't wan't to send back encrypted password either
