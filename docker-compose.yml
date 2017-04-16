@@ -1,8 +1,10 @@
 web:
   image: simongomez95/locketz
-  command: bash -c "npm install && sails lift"
+  #command: bash -c "npm install && nodemon -L --debug=0.0.0.0:5858"
+  command: bash -c "npm install && nodemon -L"
   ports:
     - "80:1337"
+    - "5858:5858"
   links:
     - db
   volumes:

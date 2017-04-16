@@ -26,6 +26,8 @@ module.exports = {
         return res.badRequest('No file was uploaded');
       }
 
+      console.log("llega?");
+
       // Save the "fd" and the url where the avatar for a user can be accessed
       userId  = jwToken.getId(req);
       Photo.create({
@@ -41,6 +43,19 @@ module.exports = {
           return res.ok();
         });
     });
+
+    return res.ok();
+  },
+
+  // GET /creator/getFollowers
+  getFollowers: function (req, res) {
+    userId  = jwToken.getId(req);
+    User.findOne(userId).populate('followers').exec(function (err, user) {
+      if (err) if(err) return res.negotiate(err);
+      return res.json({
+        followers: user.followers
+      });
+    })
   }
 };
 
