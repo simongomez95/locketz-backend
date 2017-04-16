@@ -1,5 +1,5 @@
 {
-  "name": "locketz-backend\\",
+  "name": "locketz-backend",
   "private": true,
   "version": "0.0.0",
   "description": "a Sails application",
@@ -24,7 +24,11 @@
     "rc": "1.0.1",
     "sails": "~0.12.13",
     "sails-disk": "^0.10.10",
-    "sails-mongo": "^0.12.2"
+    "sails-mongo": "^0.12.2",
+    "sails-postgresql": "^0.11.4",
+    "skipper-disk": "^0.5.9",
+    "skipper-gridfs": "^0.5.3",
+    "skipper-postgresql": "^0.13.2"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -33,7 +37,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anonymous node/sails user/locketz-backend\\.git"
+    "url": "git://github.com/anonymous node/sails user/locketz-backend.git"
   },
   "author": "anonymous node/sails user",
   "license": "",

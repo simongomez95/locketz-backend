@@ -1,11 +1,24 @@
 web:
   image: simongomez95/locketz
-  command: sails lift
+  #command: bash -c "npm install && nodemon -L --debug=0.0.0.0:5858"
+  command: bash -c "npm install && nodemon -L"
   ports:
     - "80:1337"
+    - "5858:5858"
   links:
     - db
   volumes:
     -  c:/users/yolas/workbench/locketz-backend/:/app
+
+#db:
+#  image: postgres
+#  volumes:
+#    - postgres:/var/lib/postgresql/data
+#  environment:
+#    - POSTGRES_USER=simo
+#    - POSTGRES_PASSWORD=contrasena
+
 db:
   image: mongo
+  volumes:
+    - mongo:/data/db
