@@ -94,18 +94,5 @@ module.exports = {
         })
         .pipe(res);
     });
-  },
-
-  // POST /user/follow - followUser(string)
-  follow: function (req, res) {
-
-    userId  = jwToken.getId(req);
-    User.findOne(userId).exec(function(err, user) {
-      if(err) return res.negotiate(err);
-
-      user.follows.add(req.body.followUser);
-
-      user.save(function(err) {});
-    });
   }
 };

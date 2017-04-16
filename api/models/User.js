@@ -49,12 +49,13 @@ module.exports = {
 
     follows: {
       collection: 'user',
-      via: 'followers'
+      via: 'followers',
+      dominant: true
     },
 
     followers: {
       collection: 'user',
-      via :'follows'
+      via : 'follows'
     },
 
     // We don't wan't to send back encrypted password either
