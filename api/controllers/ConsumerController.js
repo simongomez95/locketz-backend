@@ -39,7 +39,7 @@ module.exports = {
 
   getPhotos: function (req, res) {
     userId  = jwToken.getId(req);
-    User.findOne(req.followedUser).populate('photos').exec(function(err, user) {
+    User.findOne(req.body.followedUser).populate('photos').exec(function(err, user) {
       if (err) if(err) return res.negotiate(err);
       var SkipperDisk = require('skipper-disk');
       var fileAdapter = SkipperDisk(/* optional opts */);
