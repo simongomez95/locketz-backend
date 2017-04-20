@@ -35,6 +35,28 @@ module.exports = {
         following: user.follows
       });
     })
+  },
+
+  getPhotos: function (req, res) {
+    userId  = jwToken.getId(req);
+    User.findOne(req.followedUser).populate('photos').exec(function(err, user) {
+      if (err) if(err) return res.negotiate(err);
+      var SkipperDisk = require('skipper-disk');
+      var fileAdapter = SkipperDisk(/* optional opts */);
+
+      // // set the filename to the same file as the user uploaded
+      // //res.set("Content-disposition", "attachment; filename='" + file.name + "'");
+      //
+      // // Stream the file down
+      // fileAdapter.read(user.avatarFd)
+      //   .on('error', function (err){
+      //     return res.serverError(err);
+      //   })
+      //   .pipe(res);
+      return res.json({
+        photos: user.photos
+      })
+    })
   }
 };
 
