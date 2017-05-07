@@ -21,7 +21,7 @@ module.exports.issue = function(payload) {
 };
 
 // Decode token to get user id
-module.exports.decode = function(req) {
+module.exports.decode = function(req, res) {
     if (req.headers && req.headers.authorization) {
         var parts = req.headers.authorization.split(' ');
         if (parts.length == 2) {

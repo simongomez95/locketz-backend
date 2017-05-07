@@ -57,6 +57,42 @@ module.exports = {
         photos: user.photos
       })
     })
+  },
+
+  // POST /consumer/downloadPhoto - photoId, token
+  downloadPhoto: function (req, res){
+
+    userId  = jwToken.getId(req);
+
+    Photo.findOne(req.body.photoId).exec(function (err, photo){
+      if (err) {
+        return res.negotiate(err);
+      }
+      if (!photo) {
+        console.log("no hay foto lol");
+        return res.notFound();
+      }
+
+      // User has no avatar image uploaded.
+      // (should have never have hit this endpoint and used the default image)
+      if (!photo.fd) {
+        console.log("no hay fd");
+        return res.notFound();
+      }
+
+      var SkipperDisk = require('skipper-disk');
+      var fileAdapter = SkipperDisk(/* optional opts */);
+
+      // set the filename to the same file as the user uploaded
+      //res.set("Content-disposition", "attachment; filename='" + file.name + "'");
+
+      // Stream the file down
+      fileAdapter.read(photo.fd)
+        .on('error', function (err){
+          return res.serverError(err);
+        })
+        .pipe(res);
+    });
   }
 };
 
