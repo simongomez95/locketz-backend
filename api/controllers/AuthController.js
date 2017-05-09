@@ -15,12 +15,12 @@ module.exports = {
       return res.json(401, {err: 'email and password required'});
     }
 
-    User.findOne({email: email}, function (err, user) {
+    User.findOne({email: email}).populate('followers').populate('following').exec(function (err, user) {
       if (!user) {
         return res.json(401, {err: 'invalid email or password'});
       }
 
-      User.comparePassword(password, user, function (err, valid, followers, following) {
+      User.comparePassword(password, user, function (err, valid) {
         if (err) {
           return res.json(403, {err: 'forbidden'});
         }
@@ -30,9 +30,7 @@ module.exports = {
         } else {
           res.json({
             user: user,
-            token: jwToken.issue({id : user.id }),
-            followers: followers,
-            following: following
+            token: jwToken.issue({id : user.id })
           });
         }
       });
