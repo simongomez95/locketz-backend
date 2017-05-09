@@ -20,7 +20,7 @@ module.exports = {
         return res.json(401, {err: 'invalid email or password'});
       }
 
-      User.comparePassword(password, user, function (err, valid) {
+      User.comparePassword(password, user, function (err, valid, followers, following) {
         if (err) {
           return res.json(403, {err: 'forbidden'});
         }
@@ -30,7 +30,9 @@ module.exports = {
         } else {
           res.json({
             user: user,
-            token: jwToken.issue({id : user.id })
+            token: jwToken.issue({id : user.id }),
+            followers: followers,
+            following: following
           });
         }
       });

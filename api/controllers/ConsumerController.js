@@ -37,6 +37,15 @@ module.exports = {
     })
   },
 
+  // POST /consumer/searchUsers - searchName (string), token
+  searchUsers: function (req, res) {
+    User.find({username: {'contains': req.body.searchName} }).exec(function (err, users) {
+      if (err) if(err) return res.negotiate(err);
+
+      return res.json(users);
+    })
+  },
+
   getPhotos: function (req, res) {
     userId  = jwToken.getId(req);
     User.findOne(req.body.followedUser).populate('photos').exec(function(err, user) {

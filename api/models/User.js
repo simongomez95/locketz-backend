@@ -82,7 +82,7 @@ module.exports = {
 
       if(err) cb(err);
       if(match) {
-        cb(null, true);
+        cb(null, true, user.followers, user.following);
       } else {
         cb(err);
       }
