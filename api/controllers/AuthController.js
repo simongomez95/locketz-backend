@@ -15,7 +15,7 @@ module.exports = {
       return res.json(401, {err: 'email and password required'});
     }
 
-    User.findOne({email: email}).populate('followers').populate('following').exec(function (err, user) {
+    User.findOne({email: email}).populate('followers').populate('follows').exec(function (err, user) {
       if (!user) {
         return res.json(401, {err: 'invalid email or password'});
       }
