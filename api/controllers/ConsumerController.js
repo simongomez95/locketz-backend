@@ -46,6 +46,7 @@ module.exports = {
     })
   },
 
+  // POST /consumer/getPhotos - followedUser (string), token
   getPhotos: function (req, res) {
     userId  = jwToken.getId(req);
     User.findOne(req.body.followedUser).populate('photos').exec(function(err, user) {
