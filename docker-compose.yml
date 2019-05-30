@@ -7,7 +7,7 @@ web:
   links:
     - db
   volumes:
-    -  c:/users/yolas/workbench/locketz-backend/:/app
+    -  .:/app
 
 #db:
 #  image: postgres
